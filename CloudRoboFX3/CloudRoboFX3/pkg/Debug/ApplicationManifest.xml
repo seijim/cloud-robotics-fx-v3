@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="CloudRoboFX3Type" ApplicationTypeVersion="1.0.1" xmlns="http://schemas.microsoft.com/2011/01/fabric" ManifestId="fd8d5a91-33fa-41a9-9c86-e6194521ebb1">
+  <Parameters>
+    <Parameter Name="CloudRoboFxSvc_PartitionCount" DefaultValue="4" />
+    <Parameter Name="CloudRoboFxSvc_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="CloudRoboFxSvc_TargetReplicaSetSize" DefaultValue="3" />
+  </Parameters>
+  <!-- ServicePackage から ServiceManifest をインポートします。ServiceManifestName と ServiceManifestVersion は、
+       ServiceManifest.xml ファイルで定義されている ServiceManifest 要素の [Name] 属性と [Version] 属性と 
+       一致しなければなりません。-->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="CloudRoboFxSvcPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <DefaultServices>
+    <!-- 以下のセクションでは、このアプリケーション型のインスタンスが 
+         作成されるときにサービス型のインスタンスが作成されます。また、ServiceFabric PowerShell
+         モジュールを使用してサービス型の 1 つ以上のインスタンスを作成することもできます。
+         
+         以下の ServiceTypeName 属性は、インポートされた ServiceManifest.xml ファイル内で定義されている名前と一致していなければなりません。-->
+    <Service Name="CloudRoboFxSvc" ServicePackageActivationMode="ExclusiveProcess">
+      <StatefulService ServiceTypeName="CloudRoboFxSvcType" TargetReplicaSetSize="[CloudRoboFxSvc_TargetReplicaSetSize]" MinReplicaSetSize="[CloudRoboFxSvc_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[CloudRoboFxSvc_PartitionCount]" LowKey="0" HighKey="3" />
+      </StatefulService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

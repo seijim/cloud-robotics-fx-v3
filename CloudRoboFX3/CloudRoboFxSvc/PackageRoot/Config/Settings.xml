@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <!-- これは StateManager のレプリケーターにより使用されます。-->
+  <Section Name="ReplicatorConfig">
+    <Parameter Name="ReplicatorEndpoint" Value="ReplicatorEndpoint" />
+  </Section>
+  <!-- これは StateManager のレプリケーション トラフィックをセキュリティで保護するために使用されます。-->
+  <Section Name="ReplicatorSecurityConfig" />
+
+  <!-- カスタム構成セクション -->
+  <!-- Cloud Robotics FX 用パラメーター -->
+  <Section Name="IoTHub.ConnectionInfo">
+    <Parameter Name="ConnectionString" Value="HostName=xxxxxxxxx.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=xxxxxxxxxxx" />
+    <Parameter Name="CompatibleEventHubConnString" Value="Endpoint=sb://xxxxxxxxxxxx.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=xxxxxxxx;EntityPath=xxxxxxxxx" />
+    <Parameter Name="ConsumerGroup" Value="cloudroboticsfxcg" />
+  </Section>
+  <Section Name="StorageQueue.ConnectionInfo">
+    <Parameter Name="SendEnabled" Value="false" />
+    <Parameter Name="StorageAccount" Value="xxxxxxxxxxxxxxxx" />
+    <Parameter Name="StorageKey" Value="xxxxxxxxxxxxxxxxxxxxxxx" />
+  </Section>
+  <Section Name="Sql.ConnectionInfo">
+    <Parameter Name="ConnectionString" Value="Server=tcp:xxxxxxxx.database.windows.net,1433;Database=xxxxxx;User ID=xxxxxxxxx;Password=xxxxxxxxxxxx;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" />
+  </Section>
+  <Section Name="RbSetting.Info">
+    <Parameter Name="EncPassPhrase" Value="xxxxxxxxxxxxxxxxxx" />
+    <Parameter Name="CacheExpiredTimeSec" Value="60" />
+  </Section>
+  <Section Name="RbTrace.Info">
+    <Parameter Name="StorageAccount" Value="xxxxxxxxxxxxxxxx" />
+    <Parameter Name="StorageKey" Value="xxxxxxxxxxxxxxxxxxxxxxx" />
+    <Parameter Name="StorageTableName" Value="RbTraceLog" />
+    <Parameter Name="TraceLevel" Value="Detail" />
+  </Section>
+</Settings>
